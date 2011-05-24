@@ -109,9 +109,10 @@ int get_version() {
 	if(lv2peek(FW_341_ADDR) == FW_341_VALUE) {
 		return FW_341_VALUE;
 	}
-	if(lv2peek(FW_355_ADDR) == FW_355_VALUE) {
+	else if(lv2peek(FW_355_ADDR) == FW_355_VALUE) {
 		return FW_355_VALUE;
 	}
-
-	return FW_UNK_VALUE;
+	else {
+		return FW_UNK_VALUE;
+	}
 }

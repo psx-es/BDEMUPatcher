@@ -31,8 +31,7 @@ u32 *color_buffer[2];
 
 static u32 sLabelVal = 1;
 
-static void waitFinish()
-{
+static void waitFinish() {
 	rsxSetWriteBackendLabel(context,GCM_LABEL_INDEX,sLabelVal);
 
 	rsxFlushBuffer(context);
@@ -43,8 +42,7 @@ static void waitFinish()
 	++sLabelVal;
 }
 
-static void waitRSXIdle()
-{
+static void waitRSXIdle() {
 	rsxSetWriteBackendLabel(context,GCM_LABEL_INDEX,sLabelVal);
 	rsxSetWaitLabel(context,GCM_LABEL_INDEX,sLabelVal);
 
@@ -53,8 +51,7 @@ static void waitRSXIdle()
 	waitFinish();
 }
 
-void setRenderTarget(u32 index)
-{
+void setRenderTarget(u32 index) {
 	gcmSurface sf;
 
 	sf.colorFormat		= GCM_TF_COLOR_X8R8G8B8;
@@ -89,8 +86,7 @@ void setRenderTarget(u32 index)
 	rsxSetSurface(context,&sf);
 }
 
-void init_screen(void *host_addr,u32 size)
-{
+void init_screen(void *host_addr,u32 size) {
 	context = rsxInit(CB_SIZE,size,host_addr);
 
 	videoState state;
@@ -130,15 +126,13 @@ void init_screen(void *host_addr,u32 size)
 	rsxAddressToOffset(depth_buffer,&depth_offset);
 }
 
-void waitflip()
-{
+void waitflip() {
 	while(gcmGetFlipStatus()!=0)
 		usleep(200);
 	gcmResetFlipStatus();
 }
 
-void flip()
-{
+void flip() {
 	if(!first_fb) waitflip();
 	else gcmResetFlipStatus();
 
